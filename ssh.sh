@@ -6,6 +6,15 @@ if [ "$(id -u)" != "0" ]; then
    exit 1
 fi
 
+# 提示用户确认执行操作
+read -p "本脚本会修改默认SSH端口22修改为2222，是否继续？(y/n): " confirmation
+
+# 检查用户输入，只有在输入为 "y" 或 "Y" 时才继续执行
+if [ "$confirmation" != "y" ] && [ "$confirmation" != "Y" ]; then
+   echo "用户取消操作。未进行任何更改。"
+   exit 1
+fi
+
 # 检测系统类型
 if [ -f /etc/debian_version ]; then
     # Debian 或 Ubuntu 系统
@@ -32,6 +41,6 @@ elif [ -f /etc/redhat-release ]; then
     echo "SSH端口已更改为2222并且SSH服务已重启。"
 
 else
-    echo "未检测到受支持的系统类型（Debian、Ubuntu、CentOS）。"
+    echo "未检测到受支持的系统类型（Debian、Ubuntu、CentOS）。脚本仅支持这些系统。"
     exit 1
 fi
