@@ -9,7 +9,6 @@ fi
 # 提示用户确认执行操作
 read -p "本脚本会修改默认SSH端口22修改为2222，是否继续？(y/n): " confirmation
 
-# 检查用户输入，只有在输入为 "y" 或 "Y" 时才继续执行
 if [ "$confirmation" != "y" ] && [ "$confirmation" != "Y" ]; then
    echo "用户取消操作。未进行任何更改。"
    exit 1
